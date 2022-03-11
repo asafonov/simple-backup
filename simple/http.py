@@ -1,6 +1,11 @@
 from http.server import BaseHTTPRequestHandler
+from simple.file import FileHandler
 
 class HTTPHandler(BaseHTTPRequestHandler):
+    def __init__():
+        super().__init__()
+        self.filehandler = FileHandler()
+
     def _set_headers(self, status = 200, headers = {}):
         self.send_response(status)
 
@@ -29,13 +34,13 @@ class HTTPHandler(BaseHTTPRequestHandler):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
         data = post_data.decode('utf-8')
-        self.savefile(self, self.path[1:], data)
+        self.filehandler.save(self.path[1:], data)
         self._set_headers(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": "*"})
 
     def data (self, filename):
         print('Data request received')
         self._set_headers(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": "*"})
-        return self.loadfile(filename)
+        return self.filehandler.load(filename)
 
     def savefile (self, filename, data):
         return filename
