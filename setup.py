@@ -9,7 +9,7 @@ config = {
     'version': version,
     'packages': ['simple'],
     'scripts': [],
-    'name': 'spass',
+    'name': 'simple-backup',
     'entry_points': {
         'console_scripts': [
             'simple-backup = simple.__main__:main'
